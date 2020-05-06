@@ -15,7 +15,12 @@ Some operation on the ui input in sever.R
 Some reactive output displayed as a result of server calculations
 You must also include enough documentation so that a novice user could use your application.
 The documentation should be at the Shiny website itself. Do not post to an external link.
-The Shiny application in question is entirely up to you. However, if you're having trouble coming up with ideas, you could start from the simple prediction algorithm done in class and build a new algorithm on one of the R datasets packages. Please make the package simple for the end user, so that they don't need a lot of your prerequisite knowledge to evaluate your application. You should emphasize a simple project given the short time frame.
+
+## This project
+The data for this project comes from Statsbomb (see link for the github data respository: https://github.com/statsbomb/open-data). 
+![alt text](https://github.com/TDCrow/Week4Project/blob/master/www/stats-bomb-logo.png?raw=true)
+
+This respository includes the ui.R file, and the server.R file, as well as a helper file (which includes the dimensions for the pitch for the graph, and the data used (WCshots.csv).
 
 ## Your Reproducible Pitch Presentation
 
