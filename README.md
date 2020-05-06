@@ -16,7 +16,7 @@ Some reactive output displayed as a result of server calculations
 You must also include enough documentation so that a novice user could use your application.
 The documentation should be at the Shiny website itself. Do not post to an external link.
 
-## This project
+## About the Project
 The data for this project comes from Statsbomb (see link for the github data respository: https://github.com/statsbomb/open-data). 
 ![alt text](https://github.com/TDCrow/Week4Project/blob/master/www/stats-bomb-logo.png?raw=true)
 
