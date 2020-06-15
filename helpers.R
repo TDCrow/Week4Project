@@ -40,3 +40,8 @@ circleFun <- function(center = c(0,0),diameter = 1, npoints = 100){
 
 #### create center circle ####
 center_circle <- circleFun(c(halfwayline,CentreSpot),centreCirle_d,npoints = 100)
+
+goal_shape <- data.frame(x=c(0, 120),
+                         xend=c(0, 120),
+                         y=c(36,36), 
+                         yend=c(44,44))
