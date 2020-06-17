@@ -1,0 +1,97 @@
+---
+title: "Course Project"
+author: "TCrow"
+date: "15/06/2020"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Project Description
+
+This 5- slide presentation accompanies the Shiny Application created for the Developing Data Projects Week 4 Course Project. This application includes the following:
+
+1. Some form of input
+
+2. Some operation on the ui input in sever.R
+
+3. Some reactive output displayed as a result of server calculations
+
+4. Enough documentation so that a novice user could use the application.
+
+5. Documentation at the Shiny website itself.
+
+## Location of Goals scored
+
+- This project displays, on a virtual pitch, the location of shots that ended up as goals during the 2016 Football World Cup. The user can filter goals by competition stage or minute the shot was taken.
+
+- Additionally, the user can add lines showing the direction of the shot, as well as see more details about each shot by single clicking on the shot origins.
+
+## Goals scored during the World Cup
+
+```{r, message=FALSE}
+library(dplyr); library(ggplot2); library(lubridate)
+source("helpers.R")
+WCshots_shiny_pres <- read.csv("WCshots.csv")
+dataMin_pres <- WCshots_shiny_pres %>%
+    filter(between(minute, 1, 120))
+        
+dataStage_pres <- dataMin_pres #%>%
+    #filter(competition_stage.name %in% "Final")
+```
+
+```{r}
+#dataStage %>%
+ #   select(minute, player.name, team.name, competition_stage.name) %>%
+  #  rename("Minute of Goal" = minute, "Player name" = player.name, "Team name" = team.name, "Stage" = competition_stage.name)
+```
+
+```{r goals_scored, fig.align='center'}
+
+g <- ggplot(WCshots_shiny_pres, aes(location_x, location_y)) +
+            #draw pitch
+            geom_rect(aes(xmin=xmin, xmax=boxEdgeDef, ymin=boxEdgeLeft, ymax=boxEdgeRight), fill = grass_colour, colour = line_colour) +
+            geom_rect(aes(xmin=boxEdgeOff, xmax=xmax, ymin=boxEdgeLeft, ymax=boxEdgeRight), fill = grass_colour, colour = line_colour) +
+            geom_rect(aes(xmin=xmin, xmax=sixYardDef, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = line_colour) +
+            geom_rect(aes(xmin=sixYardOff, xmax=xmax, ymin=sixYardLeft, ymax=sixYardRight), fill = grass_colour, colour = line_colour) +
+            geom_point(aes(x = penSpotDef , y = CentreSpot), colour = line_colour, size = 0.75) +
+            geom_point(aes(x = penSpotOff , y = CentreSpot), colour = line_colour, size = 0.75) +
+            geom_path(data=center_circle, aes(x=x,y=y), colour = line_colour) +
+            geom_point(aes(x = halfwayline , y = CentreSpot), colour = line_colour, size = 0.75) +
+            scale_x_continuous(limits = c(0,120), breaks = c(0,120)) +
+            scale_y_continuous(limits = c(0,80), breaks = c(0,80)) +
+            geom_vline(xintercept = c(0,60,120), color="white") +
+            theme(panel.background = element_rect(fill = "chartreuse4"),
+                  legend.position = c(0.5,0.5),
+                  legend.background = element_rect(fill="lightblue", 
+                                                   size=0.5, linetype="solid",
+                                                   colour = "darkblue"),
+                  axis.title = element_blank(),
+                  axis.text = element_blank())
+#add data
+g <- g + geom_segment(data = goal_shape,aes(x=x, xend=xend, y=y,yend=yend),inherit.aes = F, color="purple", size = 2) +
+        geom_point(data = dataStage_pres, size = 2, alpha = 0.7, aes(colour = competition_stage.name))
+#print result
+g
+```
+
+
+## Data
+The data for this project comes from Statsbomb (see link for the github data respository: https://github.com/statsbomb/open-data). The data documents details of every goal scored in the 2018 world cup.
+
+```{r, message = FALSE, comment=NA}
+library(knitr)
+library(kableExtra)
+dataStage_pres %>%
+    group_by(competition_stage.name) %>%
+    summarise(total_goals = n()) %>%
+    arrange(total_goals) %>%
+    kable() %>%
+    kable_styling(bootstrap_options = c("striped", "condensed"), font_size = 14)
+```
+
+![](www/stats-bomb-logo.png){width=380}
+
+
