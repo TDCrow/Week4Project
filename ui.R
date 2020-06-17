@@ -8,6 +8,8 @@ shinyUI(fluidPage(
     # Sidebar with a slider input for minutes in the match the goal was scored 
     sidebarLayout(
         sidebarPanel(
+            p(em("Documentation, Server.R and ui.R code:", a("Github link", href = "https://github.com/TDCrow/Week4Project"))),
+            br(),
             sliderInput("min",
                         "Minute of Goal",
                         min = 1,

@@ -23,6 +23,8 @@ This 5- slide presentation accompanies the Shiny Application created for the Dev
 
 5. Documentation at the Shiny website itself.
 
+Details can be found at: https://github.com/TDCrow/Week4Project
+
 ## Location of Goals scored
 
 - This project displays, on a virtual pitch, the location of shots that ended up as goals during the 2016 Football World Cup. The user can filter goals by competition stage or minute the shot was taken.
