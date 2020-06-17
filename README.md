@@ -17,6 +17,10 @@ You must also include enough documentation so that a novice user could use your 
 The documentation should be at the Shiny website itself. Do not post to an external link.
 
 ## About the Project
+This project displays, on a virtual pitch, the location of shots that ended up as goals during the 2016 Football World Cup. The user can filter goals by competition stage or minute the shot was taken.
+
+Additionally, the user can add lines showing the direction of the shot, as well as see more details about each shot by single clicking on the shot origins.
+
 This respository includes the ui.R file, and the server.R file, as well as a helper file (which includes the dimensions for the pitch for the graph, the data used (WCshots.csv), and the logo for the data source (Statsbomb).
 
 ## The data
